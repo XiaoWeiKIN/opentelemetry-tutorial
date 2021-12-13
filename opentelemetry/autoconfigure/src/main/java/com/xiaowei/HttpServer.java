@@ -23,7 +23,7 @@ import static io.opentelemetry.api.common.AttributeKey.stringKey;
 
 public class HttpServer {
     // 在应用程序的生命周期中尽早初始化OpenTelemetry SDK是非常重要的。
-    private static final OpenTelemetry openTelemetry = TracingConfiguration.initOpenTelemetry("otel-http-server");
+    private static final OpenTelemetry openTelemetry = TracingConfiguration.initOpenTelemetry();
 
     private static final Tracer tracer =
             openTelemetry.getTracer("com.xiaowei.opentelemetry.http.HttpServer");

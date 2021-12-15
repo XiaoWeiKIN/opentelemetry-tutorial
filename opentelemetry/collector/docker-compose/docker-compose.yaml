@@ -1,0 +1,60 @@
+version: "3"
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector:0.32.0
+    command: [ "--config=/etc/otel-collector.yaml" ]
+    volumes:
+      - ./otel-collector.yaml:/etc/otel-collector.yaml
+    ports:
+      - "55679:55679" # zpages
+      - "4317:4317" # grpc
+
+  tempo:
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo-s3.yaml:/etc/tempo.yaml
+      - ./tempo-data:/tmp/tempo
+    ports:
+      - "3200:3200"  # tempo
+    restart: on-failure
+    depends_on:
+      - minio
+
+  minio:
+    image: minio/minio:latest
+    environment:
+      - MINIO_ACCESS_KEY=tempo
+      - MINIO_SECRET_KEY=supersecret
+    ports:
+      - "9001:9001"
+    entrypoint:
+      - sh
+      - -euc
+      - mkdir -p /data/tempo && /usr/bin/minio server /data --console-address ':9001'
+
+  prometheus:
+    image: prom/prometheus:latest
+    command: [ "--config.file=/etc/prometheus.yaml" ]
+    volumes:
+      - ../shared/prometheus.yaml:/etc/prometheus.yaml
+    ports:
+      - "9090:9090"
+
+  pushgateway:
+    image: prom/pushgateway
+    container_name: pushgateway
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+
+  grafana:
+    image: grafana/grafana:8.1.6
+    volumes:
+      - ../shared/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "3000:3000"

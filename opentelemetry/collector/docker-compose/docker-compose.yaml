@@ -1,7 +1,7 @@
 version: "3"
 services:
   otel-collector:
-    image: otel/opentelemetry-collector:0.32.0
+    image: otel/opentelemetry-collector:latest
     command: [ "--config=/etc/otel-collector.yaml" ]
     volumes:
       - ./otel-collector.yaml:/etc/otel-collector.yaml
@@ -42,14 +42,14 @@ services:
       - "9090:9090"
 
   pushgateway:
-    image: prom/pushgateway
+    image: prom/pushgateway:latest
     container_name: pushgateway
     restart: unless-stopped
     ports:
       - "9091:9091"
 
   grafana:
-    image: grafana/grafana:8.1.6
+    image: grafana/grafana:latest
     volumes:
       - ../shared/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
     environment:

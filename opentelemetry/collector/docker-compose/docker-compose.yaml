@@ -28,10 +28,10 @@ services:
       - MINIO_SECRET_KEY=supersecret
     ports:
       - "9001:9001"
-    entrypoint:
-      - sh
-      - -euc
-      - mkdir -p /data/tempo && /usr/bin/minio server /data --console-address ':9001'
+    volumes:
+      - /minio/data:/data
+      - /minio/config:/root/.minio/
+    command: server --console-address ':9001' /data
 
   prometheus:
     image: prom/prometheus:latest

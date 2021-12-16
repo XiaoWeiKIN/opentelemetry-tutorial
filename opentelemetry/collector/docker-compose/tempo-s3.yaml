@@ -6,7 +6,7 @@ distributor:
     otlp:
       protocols:
         http: # 默认 0.0.0.0:4318
-        grpc: 0.0.0.0:43171  # 默认 0.0.0.0:4317
+        grpc: # 默认 0.0.0.0:4317
 
 ingester:
   trace_idle_period: 10s               # the length of time after a trace has not received spans to consider it complete and flush it

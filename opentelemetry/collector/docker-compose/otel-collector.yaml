@@ -23,7 +23,7 @@ exporters:
     logLevel: debug
   otlp:
     # 导出到tempo
-    endpoint: tempo:43171
+    endpoint: tempo:4317
     insecure: true
 
 service:

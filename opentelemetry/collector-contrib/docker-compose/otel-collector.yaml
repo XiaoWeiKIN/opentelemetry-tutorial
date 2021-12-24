@@ -24,10 +24,12 @@ exporters:
   otlp:
     # 导出到tempo
     endpoint: tempo:4317
+    tls:
+      insecure: true
   prometheus:
     endpoint: "0.0.0.0:9098"
     namespace: otel-metrics-en
-    metric_expiration: 10m
+#    metric_expiration: 10m
 
 
 service:

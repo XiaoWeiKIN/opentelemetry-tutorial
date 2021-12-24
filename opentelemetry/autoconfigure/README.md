@@ -12,3 +12,7 @@ This is a simple example that demonstrates the usage of the [OpenTelemetry SDK A
 # Otel Server
 
 -Dotel.traces.exporter=otlp  -Dotel.exporter.otlp.endpoint=http://localhost:4317 -Dotel.service.name=otel-autosdk-server
+
+# Otel Client
+
+-Dotel.traces.exporter=otlp  -Dotel.exporter.otlp.endpoint=http://localhost:4317 -Dotel.service.name=otel-autosdk-client

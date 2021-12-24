@@ -15,14 +15,23 @@
     <modules>
         <module>http-jaeger</module>
         <module>autoconfigure</module>
+        <module>otel-spring-webmvc</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <log4j-version>2.14.1</log4j-version>
+        <springboot.version>2.3.5.RELEASE</springboot.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>io.opentelemetry</groupId>
                 <artifactId>opentelemetry-bom</artifactId>

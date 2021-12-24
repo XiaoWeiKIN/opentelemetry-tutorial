@@ -1,0 +1,46 @@
+extensions:
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc: # 默认 0.0.0.0:4317
+      http: # 默认 0.0.0.0:4318
+
+processors:
+  batch:
+  memory_limiter:
+    # 75% of maximum memory up to 4G
+    limit_mib: 1536
+    # 25% of limit up to 2G
+    spike_limit_mib: 512
+    check_interval: 5s
+
+
+exporters:
+  logging:
+    logLevel: debug
+  otlp:
+    # 导出到tempo
+    endpoint: tempo:4317
+    insecure: true
+  prometheus:
+    endpoint: "0.0.0.0:9098"
+    namespace: otel-metrics-en
+    metric_expiration: 10m
+
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp,logging]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheus,logging]
+  extensions: [zpages]
+
+

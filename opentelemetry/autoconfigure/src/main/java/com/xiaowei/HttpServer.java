@@ -32,7 +32,6 @@ public class HttpServer {
     // Extract the context from http headers
     private static final TextMapGetter<HttpExchange> getter =
             new TextMapGetter<HttpExchange>() {
-
                 @Override
                 public Iterable<String> keys(HttpExchange carrier) {
                     return carrier.getRequestHeaders().keySet();

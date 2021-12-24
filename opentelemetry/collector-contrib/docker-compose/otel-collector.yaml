@@ -36,11 +36,11 @@ service:
     traces:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [otlp,logging]
+      exporters: [otlp, logging]
     metrics:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [prometheus,logging]
+      exporters: [prometheus, logging]
   extensions: [zpages]
 
 

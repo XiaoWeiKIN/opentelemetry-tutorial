@@ -1,4 +1,4 @@
-java -javaagent:D:\workplace\opentelemetry-tutorial\agent\opentelemetry-javaagent.jar
+-javaagent:/Users/wangxw/project/my/opentelemetry-tutorial/agent/opentelemetry-javaagent.jar
 -Dotel.traces.exporter=otlp,logging
 -Dotel.metrics.exporter=otlp
 -Dotel.exporter.otlp.endpoint=http://localhost:4317

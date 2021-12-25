@@ -19,3 +19,4 @@ scrape_configs:
     scrape_interval: 60s
     static_configs:
       - targets: [ 'otel-collector:9098' ]
+      - targets: [ 'otel-collector:8888' ]

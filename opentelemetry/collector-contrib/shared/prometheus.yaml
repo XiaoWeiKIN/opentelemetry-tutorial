@@ -11,12 +11,12 @@ scrape_configs:
       - targets: [ 'tempo:3200' ]
   - job_name: 'pushgateway'
     honor_labels: true
-    scrape_interval: 60s
+    scrape_interval: 10s
     static_configs:
       - targets: [ 'pushgateway:9091' ]
   - job_name: 'otel-collector'
     honor_labels: true
-    scrape_interval: 60s
+    scrape_interval: 10s
     static_configs:
       - targets: [ 'otel-collector:9098' ]
       - targets: [ 'otel-collector:8888' ]

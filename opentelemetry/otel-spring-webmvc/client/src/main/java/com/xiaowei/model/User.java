@@ -1,7 +1,12 @@
 package com.xiaowei.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @Author: wangxw
@@ -9,9 +14,16 @@ import lombok.Data;
  * @Description:
  */
 @Data
+@Entity
 @Builder
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
     private String name;
-    private Integer id;
+    @Column
     private Integer age;
 }

@@ -8,5 +8,7 @@ import com.xiaowei.model.User;
  * @Description:
  */
 public interface IUserService {
-    User getUser(String name);
+    User getUser(Long id);
+
+    User saveUser(String name);
 }

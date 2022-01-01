@@ -3,7 +3,7 @@ MAINTAINER "wangxw"
 WORKDIR app
 COPY *.jar app.jar
 
-RUN java -Djarmode=layertools -jar application.jar extract
+RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM openjdk:8-jdk-alpine
 WORKDIR app

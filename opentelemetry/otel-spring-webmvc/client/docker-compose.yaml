@@ -1,7 +1,7 @@
 version: "3"
 services:
   otel-web-client:
-    image: xiaoweiwang/otel-web-client:v1.0.0
+    image: xiaoweiwang/otel-web-client:latest
     environment:
       - JVM_OPTS=-Dotel.traces.exporter=otlp,logging \
         -Dotel.metrics.exporter=otlp \

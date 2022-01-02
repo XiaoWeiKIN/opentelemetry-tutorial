@@ -21,7 +21,6 @@ RUN wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/re
     mkdir -p "$LOG_PATH"
 
 
-ENTRYPOINT ["sh", "-c", "java -javaagent:./opentelemetry-javaagent.jar $JVM_OPTS"]
-CMD ["org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["sh", "-c", "java -javaagent:./opentelemetry-javaagent.jar $JVM_OPTS org.springframework.boot.loader.JarLauncher"]
 
 

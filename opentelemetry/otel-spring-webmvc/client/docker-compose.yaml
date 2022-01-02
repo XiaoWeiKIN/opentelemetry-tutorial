@@ -6,6 +6,8 @@ services:
       - JVM_OPTS=-Dotel.traces.exporter=otlp,logging -Dotel.metrics.exporter=otlp -Dotel.exporter.otlp.endpoint=http://localhost:4317 -Dotel.service.name=user-client
     ports:
         - "8080:8080"
+    depends_on:
+      - mysql
   mysql:
     image: mysql:latest
     restart: always

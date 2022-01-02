@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/user?useUnicode=true&characterEncoding=utf8&autoReconnect=true"
+    url: "jdbc:mysql://10.168.68.71:3306/user?useUnicode=true&characterEncoding=utf8&autoReconnect=true"
     username: "root"
     password: "123456"
   jpa:

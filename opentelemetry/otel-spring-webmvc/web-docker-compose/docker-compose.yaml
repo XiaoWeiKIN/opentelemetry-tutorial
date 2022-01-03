@@ -9,16 +9,13 @@ services:
       - JAVA_OPTS="--spring.config.location=/app/appliaction.yml"
     restart: on-failure
     ports:
-        - "8080:8080"
-    depends_on:
-      - mysql
-  mysql:
-    image: mysql:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-    ports:
-      - "3306:3306"
+        - "8081:8081"
+    logging:
+      driver: loki
+      options:
+        loki-url: 'http://localhost:3100/loki/api/v1/push'
+
+
 
 
 

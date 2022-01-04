@@ -17,7 +17,7 @@ COPY --from=builder app/dependencies/ ./
 COPY --from=builder app/spring-boot-loader/ ./
 COPY --from=builder app/snapshot-dependencies/ ./
 COPY --from=builder app/application/ ./
-
+# 使用 volume 比较好
 RUN wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.9.1/opentelemetry-javaagent.jar &&\
     mkdir -p "$LOG_PATH"
 

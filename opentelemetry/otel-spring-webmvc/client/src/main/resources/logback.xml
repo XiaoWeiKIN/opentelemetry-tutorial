@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] %logger{60} [%file : %line] %msg%n"/>
+    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [trace_id=%X{trace_id}] [span_id=%X{span_id}] [trace_flags=%X{trace_flags}] %logger{60} [%file : %line] %msg%n"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] %logger{60} [%file : %line] %msg%n"/>
     <property name="LOG_FILE" value="${log.path:-/opt/log}/otel-web-client.log"/>
     <property name="LOG_FILE_MAX_SIZE" value="100MB"/>

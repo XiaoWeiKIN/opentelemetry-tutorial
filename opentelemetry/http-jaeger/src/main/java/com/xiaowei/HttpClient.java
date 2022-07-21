@@ -1,6 +1,8 @@
 package com.xiaowei;
 
 import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.common.AttributeKey;
+import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.SpanKind;
 import io.opentelemetry.api.trace.StatusCode;
@@ -11,6 +13,7 @@ import io.opentelemetry.context.propagation.TextMapPropagator;
 import io.opentelemetry.context.propagation.TextMapSetter;
 import io.opentelemetry.semconv.trace.attributes.SemanticAttributes;
 
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,6 +34,7 @@ public class HttpClient {
 
     private static final TextMapSetter<HttpURLConnection> setter = HttpURLConnection::setRequestProperty;
 
+
     private void makeRequest() throws IOException, URISyntaxException {
         int port = 8080;
         URL url = new URL("http://127.0.0.1:" + port + "/resource");
@@ -45,6 +49,10 @@ public class HttpClient {
         try (Scope scope = span.makeCurrent()) {
             span.setAttribute(SemanticAttributes.HTTP_METHOD, "GET");
             span.setAttribute(SemanticAttributes.HTTP_URL, url.toString());
+            Attributes eventAttributes = Attributes.of(
+                    AttributeKey.stringKey("name"), "lisi",
+                    AttributeKey.longKey("result"), 10L);
+            span.addEvent("Init HTTP",eventAttributes);
 
             HttpURLConnection transportLayer = (HttpURLConnection) url.openConnection();
             // 将 Context 添加 Inject 到 http header
@@ -64,6 +72,7 @@ public class HttpClient {
             } catch (Exception e) {
                 span.setStatus(StatusCode.ERROR, "HTTP Code: " + status);
             } finally {
+                span.addEvent("End HTTP");
                 span.end();
             }
 

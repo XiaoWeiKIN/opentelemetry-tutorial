@@ -24,7 +24,8 @@ exporters:
   otlp:
     # 导出到tempo
     endpoint: tempo:4317
-    insecure: true
+    tls:
+      insecure: true
 
 service:
   pipelines:
@@ -32,6 +33,10 @@ service:
       receivers: [otlp]
       processors: [memory_limiter, batch]
       exporters: [logging, otlp]
+    traces/1:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp]  
     metrics:
       receivers: [otlp]
       processors: [memory_limiter, batch]
